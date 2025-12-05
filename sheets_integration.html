@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ربط بـ Google Sheets</title>
+<style>
+:root{--bg:#f6f9fc;--card:#fff;--accent:#0b74da;--muted:#6b6b6b}
+body{margin:0;background:var(--bg);font-family:'Noto Kufi Arabic',sans-serif}
+header{background:linear-gradient(90deg,var(--accent),#2ea3ff);color:white;padding:18px}
+main{padding:20px;max-width:1100px;margin:auto}
+.card{background:#fff;padding:18px;margin-bottom:18px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+a{color:var(--accent);text-decoration:none}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border:1px solid #eee;text-align:center}
+</style>
+
+</head>
+<body>
+<header><h2>ربط بـ Google Sheets</h2></header>
+<main>
+
+<div class="card">
+<h2>ربط الموقع بـ Google Sheets (دليل سريع)</h2>
+<p>خيارات الربط:</p>
+<ol>
+<li>استخدم <strong>Google Forms</strong>: أنشئ نموذجاً وادمج الناتج (Responses) في Google Sheets. ثم يمكنك تضمين النموذج في صفحاتك.</li>
+<li>استخدم <strong>Google Apps Script</strong> و Web App: لإنشاء واجهة API آمنة لقراءة/كتابة البيانات إلى Sheets.</li>
+<li>استخدم <strong>Google Sheets API</strong> باستخدام OAuth 2.0 — مناسب للتطبيقات المتقدمة.</li>
+</ol>
+<h3>مثال سريع — تضمين Google Form</h3>
+<p>1) أنشئ Google Form يحتوي على الحقول المطلوبة.<br>2) من Form اختر إرسال → تضمين (<code>&lt;iframe&gt;</code>) ثم انسخ الكود وألصقه في صفحة HTML (أو استخدم iframe embed في Google Sites).</p>
+<pre>&lt;iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0"&gt;جارٍ التحميل…&lt;/iframe&gt;</pre>
+<h3>ملاحظة أمان</h3>
+<p>لا تحفظ مفاتيح API في ملفات HTML عامة. للحلول الآمنة استخدم Apps Script أو واجهة خلفية (server).</p>
+</div>
+
+</main>
+</body>
+</html>

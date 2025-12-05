@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>تسجيل الدخول</title>
+<style>
+:root{--bg:#f6f9fc;--card:#fff;--accent:#0b74da;--muted:#6b6b6b}
+body{margin:0;background:var(--bg);font-family:'Noto Kufi Arabic',sans-serif}
+header{background:linear-gradient(90deg,var(--accent),#2ea3ff);color:white;padding:18px}
+main{padding:20px;max-width:1100px;margin:auto}
+.card{background:#fff;padding:18px;margin-bottom:18px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+a{color:var(--accent);text-decoration:none}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border:1px solid #eee;text-align:center}
+</style>
+
+</head>
+<body>
+<header><h2>تسجيل الدخول</h2></header>
+<main>
+
+<div class="card">
+<h2>تسجيل الدخول (تجريبي)</h2>
+<p>أدخل اسم المستخدم وكلمة المرور التالية لتجربة: <strong>admin / 1234</strong></p>
+<form id="loginForm">
+  <div><label>المستخدم: <input id="user" required></label></div>
+  <div><label>كلمة المرور: <input id="pass" type="password" required></label></div>
+  <div style="margin-top:8px"><button type="submit">دخول</button></div>
+</form>
+<div id="message" style="margin-top:12px;color:green"></div>
+</div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const u = document.getElementById('user').value.trim();
+  const p = document.getElementById('pass').value.trim();
+  // Mock check
+  if((u === 'admin' && p === '1234') || (u === 'super' && p === 'pass')){
+    localStorage.setItem('school_user', JSON.stringify({user:u,role:'admin'}));
+    document.getElementById('message').textContent = 'تم تسجيل الدخول بنجاح. توجه إلى لوحة التحكم.';
+    setTimeout(()=> location.href='dashboard.html',800);
+  } else {
+    document.getElementById('message').style.color='red';
+    document.getElementById('message').textContent = 'بيانات خاطئة (تجريبية). استخدم admin / 1234.';
+  }
+});
+</script>
+
+</main>
+</body>
+</html>

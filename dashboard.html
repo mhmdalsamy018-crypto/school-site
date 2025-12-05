@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>لوحة تحكم المشرف</title>
+<style>
+:root{--bg:#f6f9fc;--card:#fff;--accent:#0b74da;--muted:#6b6b6b}
+body{margin:0;background:var(--bg);font-family:'Noto Kufi Arabic',sans-serif}
+header{background:linear-gradient(90deg,var(--accent),#2ea3ff);color:white;padding:18px}
+main{padding:20px;max-width:1100px;margin:auto}
+.card{background:#fff;padding:18px;margin-bottom:18px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+a{color:var(--accent);text-decoration:none}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border:1px solid #eee;text-align:center}
+</style>
+
+</head>
+<body>
+<header><h2>لوحة تحكم المشرف</h2></header>
+<main>
+
+<div class="card">
+<h2>لوحة تحكم المشرف</h2>
+<p id="welcome"></p>
+<div id="stats"></div>
+<div style="margin-top:12px"><a href="attendance.html">اذهب إلى الحضور</a> | <a href="login.html">تسجيل الخروج</a></div>
+</div>
+<script>
+const user = JSON.parse(localStorage.getItem('school_user')||'null');
+document.getElementById('welcome').textContent = user ? ('مرحباً، ' + user.user) : 'لم يتم تسجيل الدخول (تجريبي)';
+function load(){ return JSON.parse(localStorage.getItem('attendance_records_v1')||'[]'); }
+function compute(){
+  const arr=load();
+  const total=arr.length;
+  const present=arr.filter(r=>r.status==='حاضر').length;
+  const absent=arr.filter(r=>r.status==='غائب').length;
+  const bySection = arr.reduce((m,r)=>{ m[r.section]=(m[r.section]||0)+1; return m; },{});
+  return {total,present,absent,bySection};
+}
+function render(){
+  const s=compute();
+  const el=document.getElementById('stats');
+  el.innerHTML = `<ul><li>إجمالي السجلات: <strong>${s.total}</strong></li><li>حاضر: <strong>${s.present}</strong></li><li>غائب: <strong>${s.absent}</strong></li></ul>`;
+  let by='<h3>حسب القسم</h3><ul>';
+  for(const k in s.bySection) by+=`<li>${k}: ${s.bySection[k]}</li>`;
+  by+='</ul>';
+  el.innerHTML += by;
+}
+render();
+// logout link clears user
+</script>
+
+</main>
+</body>
+</html>
